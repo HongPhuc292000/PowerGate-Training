@@ -1,6 +1,10 @@
 import { createSelector } from "reselect";
 import { IPayroll } from "../models/payrollModel";
 
+//Home Selector 
+export const homeListSelector = (state:any) => state.home.listItems;
+
+//Payroll Selector 
 export const payrollListSelector = (state:any) => state.payroll.payrollList;
 export const filterStatusSelector = (state:any) => state.payroll.filters.status;
 export const filterDateFromSelector = (state:any) => state.payroll.filters.from;

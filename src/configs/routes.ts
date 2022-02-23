@@ -3,5 +3,7 @@ export const ROUTES = {
   contact: '/contact',
   login: '/login',
   signUp: '/sign-up',
-  payroll: '/payroll'
+  payroll: '/payroll',
+  detail: '/detail',
+  profile: '/profile'
 };

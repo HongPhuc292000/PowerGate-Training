@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import '../css/payroll.css';
+import '../scss/payroll.scss';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { IPayrollItem } from '../models/payrollModel';
 import ViewDetails from './ViewDetails';

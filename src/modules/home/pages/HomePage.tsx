@@ -8,13 +8,17 @@ import { Action } from 'redux';
 import { fetchThunk } from '../../common/redux/thunk';
 import { IFormParams } from '../../../models/album';
 import { IItem, setIItem, updateIItem } from '../redux/homeForm';
+import { homeListSelector } from '../redux/selector';
+import '../scss/home.scss'
+import Header from '../components/Header';
+import { IUpdate } from '../models/homeModel';
 
 
 
 const HomePage = () => {
   
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
-  const listItem = useSelector((state: AppState)=>state.home.listItems);
+  const listItem = useSelector(homeListSelector);
 
   const [data,setData] = useState<Array<IFormParams>>([]);
   const [statusBtn, setStatusBtn] = useState(true);
@@ -24,72 +28,62 @@ const HomePage = () => {
         fetchThunk('https://jsonplaceholder.typicode.com/photos', 'get')
       );
       setData(json.slice(0,5));
+      dispatch(updateIItem(json.slice(0,5)));
   },[])
-  
-  // const changeData = useCallback(async()=>{
-  //   const newData = await setNewData()
-  // },[newData])
 
   useEffect(()=>{
     getData()
-  }, [statusBtn])
+  }, [])
 
-  useEffect(()=>{
-    const newData = [...data]
-    console.log(newData)
-    dispatch(updateIItem(newData));
-  },[data])
-
-  // useEffect(()=>{
-  //   dispatch(setIItem(data));
-  // }, [])
-
-  const handleUpdateData = useCallback(()=>{
+  const handleAcceptUpdateData = useCallback(()=>{
     const newData = [...data]
     dispatch(updateIItem(newData));
   },[data])
 
-  console.log(listItem)
-
-
-
-  const onChange = (id:number, title:string, status: boolean)=>{
+  const onChangeStatus = (status: boolean)=>{
     setStatusBtn(status);
-    setData(data.map(item => (item.id === id ? {...item, title: title} : item))) 
   };
 
+  const onUpdate  = (infoUpdate: IUpdate) => {
+    const id = listItem.findIndex((x:any)=>x.id === infoUpdate.id)
+    console.log(id);
+  }
+
   return(
-    <div className='container'>
-      <div className='row justify-content-center'>
-        <div className='row' style={{"width":'30%'}}>
-          <div className='mt-4 d-flex justify-content-end'>
-            <button disabled={statusBtn} onClick={handleUpdateData} type="button" className="btn btn-light border me-2">Confirm</button>
-            <button disabled={statusBtn} type="button" className="btn btn-light border">Reset</button> 
+    <>
+      <Header></Header>
+      <div className='container content-wrap'>
+        <div className='row justify-content-center'>
+          <div className='row' style={{"width":'30%'}}>
+            <div className='d-flex justify-content-end'>
+              <button disabled={statusBtn} onClick={handleAcceptUpdateData} type="button" className="btn btn-light border me-2">Confirm</button>
+              <button disabled={statusBtn} type="button" className="btn btn-light border">Reset</button> 
+            </div>
+            <div className='border p-4 mt-2' style={{background:"#92c952"}}>
+              {
+                listItem.map((item:IFormParams, index:number)=>{
+                  return(
+                    <HomeForm
+                      // updateItem={ updateItem }
+                      onChange={ onChangeStatus }
+                      onUpdate={ onUpdate }
+                      key={index}
+                      albumId={item.id}
+                      id={item.id}
+                      title={item.title}
+                      url={item.url}
+                      thumbnailUrl={item.thumbnailUrl}
+                      data={data}
+                    />
+                  )
+                })
+              }
+            </div> 
           </div>
-          <div className='border p-4 mt-2' style={{background:"#92c952"}}>
-            {
-              listItem.map((item:IFormParams, index)=>{
-                return(
-                  <HomeForm
-                    // updateItem={ updateItem }
-                    onChange={ onChange }
-                    key={index}
-                    albumId={item.id}
-                    id={item.id}
-                    title={item.title}
-                    url={item.url}
-                    thumbnailUrl={item.thumbnailUrl}
-                  />
-                )
-              })
-            }
-          </div> 
-        </div>
-        <div className='col-12'>
-        <a href="/payroll" className='payroll-btn btn btn-primary'>Payroll</a>
         </div>
       </div>
-    </div>
+    </>
+    
   )
 };
 

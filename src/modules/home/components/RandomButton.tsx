@@ -7,7 +7,7 @@ import { Action } from 'redux';
 import { clearFilterPayroll } from '../redux/payroll';
 import { CSVLink } from "react-csv";
 import { IPayroll } from '../models/payrollModel';
-import '../css/payroll.css';
+import '../scss/payroll.scss';
 
 interface Props{
     value: string,

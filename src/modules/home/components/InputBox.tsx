@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import '../css/payroll.css';
+import '../scss/payroll.scss';
 import { filterInvoicePayroll } from '../redux/payroll';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';

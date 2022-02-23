@@ -6,8 +6,10 @@ import ProtectedRoute from './modules/common/components/ProtectedRoute';
 const HomePage = lazy(() => import('./modules/home/pages/HomePage'));
 const ContactPage = lazy(() => import('./modules/home/pages/ContactPage'));
 const LoginPage = lazy(() => import('./modules/auth/pages/LoginPage'));
-const SignUpPage = lazy(()=> import('./modules/auth/pages/SignUpPage'))
-const PayrollPage = lazy(()=> import('./modules/home/pages/PayrollPage'))
+const SignUpPage = lazy(()=> import('./modules/auth/pages/SignUpPage'));
+const PayrollPage = lazy(()=> import('./modules/home/pages/PayrollPage'));
+const DetailPage = lazy(()=> import('./modules/home/pages/DetailPage'));
+const ProfilePage = lazy(()=> import('./modules/home/pages/ProfilePage'))
 
 interface Props {}
 
@@ -22,7 +24,8 @@ export const Routes = (props: Props) => {
         <Route path={ROUTES.payroll} component={PayrollPage} />
         <ProtectedRoute path={ROUTES.home} component={HomePage} />
         <Route path={ROUTES.contact} component={ContactPage} />
-
+        <ProtectedRoute path={ROUTES.detail} component={DetailPage} />
+        <ProtectedRoute path={ROUTES.profile} component={ProfilePage} />
         <Route path="/" component={LoginPage} />
       </Switch>
     </Suspense>

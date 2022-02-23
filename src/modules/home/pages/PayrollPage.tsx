@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import RandomButton from '../components/RandomButton';
-import '../css/payroll.css'
+import '../scss/payroll.scss';
+import '../scss/home.scss';
 import SelectBox from '../components/SelectBox';
 import SelectDate from '../components/SelectDate';
 import InputBox from '../components/InputBox';
@@ -14,6 +15,7 @@ import { AppState } from '../../../redux/reducer';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { setDefaultListPayroll } from '../redux/payroll';
+import Header from '../components/Header';
 
 
 const data = LIST_PAYROLL.payrolls;
@@ -48,46 +50,51 @@ function Payroll() {
   },[])
 
   return (
-    <div className='container mt-4'>
-      <div className='row justify-content-between me-0 mb-2'>
-        <p className='header col-9'>Payroll Transactions List</p>
-        <div className="col-3">
-          <div className="row justify-content-end">
-            <RandomButton value="Export CSV" type="default" data={data}/> 
-          </div>   
-        </div>
-      </div>
-      <div className='row justify-content-between me-0'>
-        <div className='col-9'>
-          <div className="row justify-content-evenly">
-            <SelectBox value="Status" data={status}/>
-            <SelectBox value="Client" data={status}/>
-            <SelectDate from = "From" to="To"/>
-            <InputBox value="Invoice #"/>
+    <>
+      <Header></Header>
+      <div className='container content-wrap payroll-container'>
+        <div className='row justify-content-between me-0 mb-2'>
+          <p className='header col-9'>Payroll Transactions List</p>
+          <div className="col-3">
+            <div className="row justify-content-end">
+              <RandomButton value="Export CSV" type="default" data={data}/> 
+            </div>   
           </div>
         </div>
-        <div className='col-3'>
-          <div className="row justify-content-between h-100">
-            <RandomButton value="apply" type="confirm" data={data}/>
-            <RandomButton value="clear" type="cancel" data={data}/>
+        <div className='row justify-content-between me-0'>
+          <div className='col-9'>
+            <div className="row justify-content-evenly">
+              <SelectBox value="Status" data={status}/>
+              <SelectBox value="Client" data={status}/>
+              <SelectDate from = "From" to="To"/>
+              <InputBox value="Invoice #"/>
+            </div>
+          </div>
+          <div className='col-3'>
+            <div className="row justify-content-between h-100">
+              <RandomButton value="apply" type="confirm" data={data}/>
+              <RandomButton value="clear" type="cancel" data={data}/>
+            </div>
+          </div>
+        </div>
+        <div className="row mt-4 ms-1 me-1">
+          <TableView data={payrollList.slice(page * pagination.item - pagination.item, page * pagination.item)} listStatus={status}/>
+        </div>
+        
+        <div className='row mt-2'>
+          <div className='col-6 ps-4' style={{fontWeight: '600'}}>
+            Showing {pagination.item} from {listData.length} data
+          </div>
+          <div className='col-6 d-flex justify-content-end'>
+            <Stack spacing={2}>
+              <Pagination count={Math.ceil(payrollList.length / pagination.item)} page={page} color="primary" onChange={ handleChange } defaultPage={1}/>
+            </Stack>
           </div>
         </div>
       </div>
-      <div className="row mt-4 ms-1 me-1">
-        <TableView data={payrollList.slice(page * pagination.item - pagination.item, page * pagination.item)} listStatus={status}/>
-      </div>
-      
-      <div className='row mt-2'>
-        <div className='col-6 ps-4' style={{fontWeight: '600'}}>
-          Showing {pagination.item} from {listData.length} data
-        </div>
-        <div className='col-6 d-flex justify-content-end'>
-          <Stack spacing={2}>
-            <Pagination count={Math.ceil(payrollList.length / pagination.item)} page={page} color="primary" onChange={ handleChange } defaultPage={1}/>
-          </Stack>
-        </div>
-      </div>
-    </div>
+    </>
+    
+    
   )
 }
 

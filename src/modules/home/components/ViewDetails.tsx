@@ -23,7 +23,7 @@ import { styled, makeStyles } from '@mui/styles'
 // import styled from 'styled-components';
 import { payrollListSelector } from '../redux/selector';
 import moment, { Moment } from 'moment';
-import '../css/payroll.css'
+import '../scss/payroll.scss'
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -91,8 +91,8 @@ function ViewDetails(props: Props) {
   const storePayrollData = useSelector(payrollListSelector)
   const {value, type, data, listStatus} = props;
   
-  const [open, setOpen] = React.useState(false);
-  const [ date , setDate] = React.useState<Date | null>(new Date(data.time_created));
+  const [ open, setOpen ] = React.useState(false);
+  const [ date , setDate ] = React.useState<Date | null>(new Date(data.time_created));
   const [ status, setStatus ] = React.useState(checkStatus({...data}));
   const [ currency, setCurrency ] = React.useState(data.currency);
   const [ total, setTotal ] = React.useState(data.volume_input_in_input_currency + data.fees);
@@ -146,17 +146,7 @@ function ViewDetails(props: Props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{position: 'absolute' as 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: 600,
-                  border: '2px solid #000',
-                  boxShadow: 24,
-                  p: 4,
-                  backgroundColor: '#F1F2F5',
-                  borderRadius: '10px',
-                  paddingTop: '16px'}}>
+        <Box sx={{position: 'absolute' as 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 600, border: '2px solid #000', boxShadow: 24, p: 4, backgroundColor: '#F1F2F5', borderRadius: '10px', paddingTop: '16px'}}>
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={titleStyle}>
             Payroll Information
           </Typography>

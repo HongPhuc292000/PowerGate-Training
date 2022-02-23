@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { filterDateFromPayroll, filterDateToPayroll } from '../redux/payroll';
 import Stack from '@mui/material/Stack';
-import '../css/payroll.css';
+import '../scss/payroll.scss';
 
 interface Props{
   from: string,
