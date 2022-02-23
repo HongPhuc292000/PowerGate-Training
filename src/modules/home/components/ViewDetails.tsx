@@ -20,6 +20,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { updatePayrollItem } from '../redux/payroll';
 import { styled, makeStyles } from '@mui/styles'
+// import styled from 'styled-components';
 import { payrollListSelector } from '../redux/selector';
 import moment, { Moment } from 'moment';
 import '../css/payroll.css'
@@ -63,14 +64,18 @@ const buttonStyle = {
   justifyContent: 'flex-end',
 }
 
-const DateSelect = styled(DatePicker)({
-  width: '100%'
-});
 
 const useDateStyles = makeStyles({
   root: {
-    backgroundColor: 'red',
-    width: '100%'
+    marginBottom: '28px',
+    '& > div':{
+      width: '100%',
+      '& div':{
+        '& input':{
+          width: '100%'
+        },
+      },
+    },
   },
 });
 
@@ -87,14 +92,6 @@ function ViewDetails(props: Props) {
   const {value, type, data, listStatus} = props;
   
   const [open, setOpen] = React.useState(false);
-  // const [payrollItem, setPayrollItem] = React.useState({
-  //   id: data.payroll_id,
-  //   status: checkStatus({...data}),
-  //   date: data.time_created || null,
-  //   currency: data.currency,
-  //   total: data.volume_input_in_input_currency + data.fees,
-  // });
-
   const [ date , setDate] = React.useState<Date | null>(new Date(data.time_created));
   const [ status, setStatus ] = React.useState(checkStatus({...data}));
   const [ currency, setCurrency ] = React.useState(data.currency);
@@ -139,7 +136,7 @@ function ViewDetails(props: Props) {
     handleClose();
   }
 
-  const classes = useDateStyles(props);
+  const classes = useDateStyles();
   return (
     <div>
       <Button onClick={handleOpen} className={'col-5 custom-button ' + type}>{value}</Button>
@@ -149,7 +146,17 @@ function ViewDetails(props: Props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={{position: 'absolute' as 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 600,
+                  border: '2px solid #000',
+                  boxShadow: 24,
+                  p: 4,
+                  backgroundColor: '#F1F2F5',
+                  borderRadius: '10px',
+                  paddingTop: '16px'}}>
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={titleStyle}>
             Payroll Information
           </Typography>
@@ -170,9 +177,9 @@ function ViewDetails(props: Props) {
                 }    
               </Select>
             </FormControl>
-            <LocalizationProvider dateAdapter={DateAdapter}>
+            <Box className={classes.root}>
+              <LocalizationProvider dateAdapter={DateAdapter}>
               <DatePicker
-                className={classes.root}
                 label="Date"
                 value={date}
                 onChange={(newValue) => {
@@ -181,6 +188,7 @@ function ViewDetails(props: Props) {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
+            </Box>
             <TextField fullWidth label="Client" id="fullWidth" sx={inputStyle} value={data.company_id} disabled/>
             <TextField fullWidth label="Currency" id="fullWidth" sx={inputStyle} value={currency} onChange={ handleChangeCurrency }/>
             <TextField fullWidth label="Total" id="fullWidth" sx={inputStyle} value={total} onChange={ handleChangeTotal }/>

@@ -56,10 +56,6 @@ export const deletePayrollItem = createCustomAction('payroll/deletePayrollItem',
     data,
 }))
 
-// export const filterInvoicePayroll = createCustomAction('home/setIItem', (data:Array<IPayrollItem>) => ({
-//     data,
-// }));
-
 const actions = { setDefaultListPayroll,
     filterStatusPayroll,
     filterDateFromPayroll,
