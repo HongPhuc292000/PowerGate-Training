@@ -36,9 +36,8 @@ const HomePage = () => {
   }, [])
 
   const handleAcceptUpdateData = useCallback(()=>{
-    const newData = [...data]
-    dispatch(updateIItem(newData));
-  },[data])
+    dispatch(updateIItem(listItem));
+  },[listItem])
 
   const onChangeStatus = (status: boolean)=>{
     setStatusBtn(status);
@@ -46,25 +45,23 @@ const HomePage = () => {
 
   const onUpdate  = (infoUpdate: IUpdate) => {
     const id = listItem.findIndex((x:any)=>x.id === infoUpdate.id)
-    console.log(id);
+    listItem[id].title = infoUpdate.title;
   }
+
 
   return(
     <>
       <Header></Header>
-      <div className='container content-wrap'>
-        <div className='row justify-content-center'>
-          <div className='row' style={{"width":'30%'}}>
-            <div className='d-flex justify-content-end'>
-              <button disabled={statusBtn} onClick={handleAcceptUpdateData} type="button" className="btn btn-light border me-2">Confirm</button>
-              <button disabled={statusBtn} type="button" className="btn btn-light border">Reset</button> 
+      <div className='container content-wrap home-content'>
+          <div className='row justify-content-center align-items-center'>
+            <div className='d-flex justify-content-end col-2 flex-column'>
+              <button disabled={statusBtn} onClick={handleAcceptUpdateData} type="button" className="btn btn-primary border me-2">Confirm</button>
             </div>
-            <div className='border p-4 mt-2' style={{background:"#92c952"}}>
+            <div className='col-8'>
               {
                 listItem.map((item:IFormParams, index:number)=>{
                   return(
                     <HomeForm
-                      // updateItem={ updateItem }
                       onChange={ onChangeStatus }
                       onUpdate={ onUpdate }
                       key={index}
@@ -78,9 +75,11 @@ const HomePage = () => {
                   )
                 })
               }
-            </div> 
+            </div>
+            <div className='d-flex justify-content-end col-2 flex-column'>
+              <button disabled={statusBtn} type="button" className="btn btn-danger border">Reset</button> 
+            </div>
           </div>
-        </div>
       </div>
     </>
     

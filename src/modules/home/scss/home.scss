@@ -1,15 +1,21 @@
+.home-content{
+    background-color: #F1F2F5;
+    border-radius: 10px;
+    padding: 40px;
+}
+
 .content-wrap{
     margin-top: 100px;
 }
 
 .input-text{
-    border: 2px solid black;
-    /* height: 72px; */
+    border: 2px solid transparent;
     cursor: pointer;
     width: 100%;
     padding: 0;
-    border-radius: 2px;
+    border-radius: 4px;
     background-color: aqua;
+    padding: 16px;
 }
 
 .input-text:hover{
@@ -23,6 +29,7 @@
     padding: 0;
     border: 2px solid white;
     outline: none;
+    padding: 16px;
 }
 
 .payroll-btn{
@@ -32,4 +39,12 @@
 
 .payroll-btn:hover{
     color: #fff;
+}
+
+.item-wrap{
+    padding: 18px;
+    border-radius: 4px;
+    &:not(:last-child){
+        margin-bottom: 12px;
+    }
 }

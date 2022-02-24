@@ -39,18 +39,20 @@ function HomeForm(props: IGetSong) {
     }
     
     const handleMouseLeave = (e:any)=>{
-        onUpdate(infoUpdate);
+        if(e.target.value != title){
+            onUpdate(infoUpdate);
+        }
     }
 
     return (
         (id % 2 == 0) ? (
-            <div className='item-wrap border border-dark border-2 d-flex align-items-center p-2 m-2' style={{backgroundColor:"grey"}}>
+            <div className='item-wrap d-flex align-items-center' style={{backgroundColor:"grey"}}>
                 <img className='img-info border border-danger rounded-circle me-2' src={thumbnailUrl} alt="" style={{width:"50px", height:"50px"}} />
-                <textarea rows={3} value={infoUpdate.title} className="input-text" onMouseLeave={handleMouseLeave} onChange={ handleOnChange } />
+                <input value={infoUpdate.title} className="input-text" onMouseLeave={handleMouseLeave} onChange={ handleOnChange } />
             </div>) : (
-            <div className='item-wrap border border-dark border-2 d-flex align-items-center p-2 m-2' style={{backgroundColor:"wheat"}}>
+            <div className='item-wrap d-flex align-items-center' style={{backgroundColor:"wheat"}}>
                 <img className='img-info border border-danger rounded-circle me-2' src={thumbnailUrl} alt="" style={{width:"50px", height:"50px"}} />
-                <textarea rows={3} value={infoUpdate.title} className="input-text" onMouseLeave={handleMouseLeave} onChange={ handleOnChange } />
+                <input value={infoUpdate.title} className="input-text" onMouseLeave={handleMouseLeave} onChange={ handleOnChange } />
             </div>
         )
     )
