@@ -11,9 +11,6 @@ function Header() {
                 <Link to="/home" className='payroll-btn'>Home</Link>
             </Button>
             <Button className='nav-item' variant="contained">
-                <Link to="/detail" className='payroll-btn'>Detail</Link>
-            </Button>
-            <Button className='nav-item' variant="contained">
                 <Link to="/payroll" className='payroll-btn'>Payroll</Link>
             </Button>
             <Button className='nav-item' variant="contained">

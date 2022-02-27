@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { IItem } from '../redux/homeForm';
 import { values } from 'lodash';
 import { IUpdate } from '../models/homeModel';
+import { Link } from 'react-router-dom';
 interface IGetSong {
     onChange(statusBtn:boolean): void,
     onUpdate(infoUpdate: IUpdate): void,
@@ -47,11 +48,15 @@ function HomeForm(props: IGetSong) {
     return (
         (id % 2 == 0) ? (
             <div className='item-wrap d-flex align-items-center' style={{backgroundColor:"grey"}}>
-                <img className='img-info border border-danger rounded-circle me-2' src={thumbnailUrl} alt="" style={{width:"50px", height:"50px"}} />
+                <Link to={`/detail/${id}`} className='payroll-btn'>
+                    <img className='img-info border border-danger rounded-circle me-2' src={thumbnailUrl} alt="" style={{width:"50px", height:"50px"}} />
+                </Link>
                 <input value={infoUpdate.title} className="input-text" onMouseLeave={handleMouseLeave} onChange={ handleOnChange } />
             </div>) : (
             <div className='item-wrap d-flex align-items-center' style={{backgroundColor:"wheat"}}>
-                <img className='img-info border border-danger rounded-circle me-2' src={thumbnailUrl} alt="" style={{width:"50px", height:"50px"}} />
+                <Link to={`/detail/${id}`} className='payroll-btn'>
+                    <img className='img-info border border-danger rounded-circle me-2' src={thumbnailUrl} alt="" style={{width:"50px", height:"50px"}} />
+                </Link>
                 <input value={infoUpdate.title} className="input-text" onMouseLeave={handleMouseLeave} onChange={ handleOnChange } />
             </div>
         )

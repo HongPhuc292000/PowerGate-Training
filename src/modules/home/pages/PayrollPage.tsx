@@ -30,12 +30,10 @@ function Payroll() {
     item: 6
   })
   const [status, setStatus] = useState<Array<string>>(['Receive', 'Processing', 'Fulfill', 'Cancel', 'Pending']);
-  // const [client, setClient] = useState<Array<string>>(['Receive', 'Processing', 'Fulfill', 'Cancel', 'Pending']);
   
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-  // console.log(useSelector((state:AppState) =>state.payroll.filters))
 
   const pushData = useCallback( async()=>{
     dispatch(setDefaultListPayroll(data))

@@ -11,7 +11,7 @@ module.exports = function (app) {
     '/api',
     createProxyMiddleware({
       target: 'http://api.training.div3.pgtest.co/api/v1',
-      changeOrigin: true,
+      changeOrigin: true, 
       secure: false,
       pathRewrite: {
         '^/api': '',
