@@ -97,7 +97,7 @@ export default function DetailForm() {
 
   const uploadAvatar = async ()=>{
     const file = await generateUpload(previewCanvasRef.current, completedCrop);
-    console.log(file)
+    // console.log(file)
     // if(file){
     //   const formData = new FormData();
     //   formData.append('file', file, file.name);

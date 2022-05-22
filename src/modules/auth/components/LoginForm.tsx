@@ -98,16 +98,22 @@ const LoginForm = (props: Props) => {
       </div>
 
       <div className="row justify-content-md-center" style={{ margin: '16px 0' }}>
-        <div className="col-md-auto">
+        <div className="col-4">
           <button
             className="btn btn-primary"
             type="submit"
-            style={{ minWidth: '160px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             disabled={loading}
           >
             {loading && <div className="spinner-border spinner-border-sm text-light mr-2" role="status" />}
             <FormattedMessage id="login" />
           </button>
+        </div>
+
+        <div className="col-4">
+          <a href="/sign-up" className='btn btn-primary' style={{display: 'inline-block', width: "100%" }}>
+            <FormattedMessage id="register" />
+          </a>
         </div>
       </div>
     </form>

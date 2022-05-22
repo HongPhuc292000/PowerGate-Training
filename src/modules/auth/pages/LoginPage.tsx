@@ -16,8 +16,7 @@ import { ROUTES } from '../../../configs/routes';
 import { replace } from 'connected-react-router';
 import { getErrorMessageResponse } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
-import { debug } from 'console';
-import { debuglog } from 'util';
+import { Grid } from '@mui/material';
 
 const LoginPage = () => {
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
@@ -59,12 +58,7 @@ const LoginPage = () => {
       }}
     >
       <img src={logo} alt="" style={{ maxWidth: '250px', margin: '32px' }} />
-
       <LoginForm onLogin={onLogin} loading={loading} errorMessage={errorMessage} />
-
-      <a href="/sign-up">
-        <FormattedMessage id="register" />
-      </a>
     </div>
   );
 };
